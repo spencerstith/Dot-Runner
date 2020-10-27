@@ -1,16 +1,35 @@
 PVector pos, vel;
+boolean running;
 void setup() {
   size(600, 600);
   background(0);
   stroke(255);
-  pos = new PVector(random(width), random(height));
-  vel = new PVector(random(5), random(5));
+  
+  running = false;
 }
 
 void draw() {
-  point(pos.x, pos.y);
-  pos.add(vel);
-  checkEdge();
+  if (running) {
+    point(pos.x, pos.y);
+    pos.add(vel);
+    checkEdge();
+  } else {
+    background(0);
+    if (pos != null) {
+      line(pos.x, pos.y, mouseX, mouseY);
+    }
+  }
+}
+
+void mouseClicked() {
+  if (pos == null) {
+    pos = new PVector(mouseX, mouseY);
+  } else {
+    PVector newPos = new PVector(mouseX, mouseY);
+    vel = newPos.sub(pos).div(10);
+    running = true;
+    background(0);
+  }
 }
 
 void checkEdge() {
