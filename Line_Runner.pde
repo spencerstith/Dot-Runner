@@ -1,8 +1,10 @@
 PVector pos, vel;
 boolean running;
 void setup() {
-  size(600, 600);
+  fullScreen(P2D);
+  //size(600, 600);
   background(0);
+  strokeWeight(2);
   stroke(255);
   
   running = false;
@@ -10,6 +12,7 @@ void setup() {
 
 void draw() {
   if (running) {
+    stroke(random(255), random(255), random(255));
     point(pos.x, pos.y);
     pos.add(vel);
     checkEdge();
